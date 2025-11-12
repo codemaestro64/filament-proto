@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package pb;
+
+// Defines the service for managing user wallets, including CRUD (Create, Read, Update, Delete) operations.
+option go_package = "github.com/filament-labs/proto/gen/go/pb";
+
+// Imports the standard Google Timestamp type for consistent time representation.
+import "google/protobuf/timestamp.proto";
+
+// --- REQUEST/RESPONSE MESSAGES FOR SINGLE WALLET OPERATIONS (READ) ---
+
+// Request to retrieve a single, specific wallet by its unique identifier.
+message GetWalletRequest {
+  string wallet_id = 1; // The unique ID of the wallet to retrieve.
+}
+
+// Response containing the detailed information about a single wallet.
+message GetWalletResponse {
+  string id = 1;               // The unique ID of the wallet.
+  bool is_default = 2;         // Indicates if this is the user's primary wallet.
+  string wallet_name = 3;      // User-defined name for the wallet (e.g., "Savings", "Trading").
+  map<string, string> addresses = 4; // Map of address type (f1, f4, 0x) to its address (value).
+  // Use a string for financial amounts to prevent floating-point inaccuracies.
+  string balance = 5;           
+  google.protobuf.Timestamp created_at = 6; // Timestamp when the wallet was created.
+}
+
+// --- REQUEST/RESPONSE MESSAGES FOR LISTING WALLETS (READ ALL) ---
+
+// Request to retrieve all wallets associated with the authenticated user.
+message GetWalletsRequest {} 
+
+// Response containing a list of all wallets and the account lock status.
+message GetWalletsResponse {
+  bool is_locked = 1;                 // Indicates if the user's wallet system is locked (requires passphrase).
+  repeated GetWalletResponse wallets = 2; // The list of all retrieved wallets.
+}
+
+// --- REQUEST/RESPONSE MESSAGES FOR CREATION (CREATE) ---
+
+// Request to create a new wallet.
+message CreateWalletRequest {
+  string wallet_name = 1;       // The initial name for the new wallet.
+  optional string passphrase = 2; // Optional passphrase for initial encryption/unlock.
+}
+
+// Response returning the details of the newly created wallet.
+message CreateWalletResponse {
+  GetWalletResponse wallet = 1;
+}
+
+// --- REQUEST/RESPONSE MESSAGES FOR UPDATING (UPDATE) ---
+
+// Request to update metadata for an existing wallet.
+message UpdateWalletRequest {
+  string wallet_id = 1;            // The ID of the wallet to modify.
+  optional string wallet_name = 2; // Optional: New name for the wallet.
+  optional bool set_default = 3;   // Optional: Set this wallet as the user's new default.
+}
+
+// Response returning the updated wallet details.
+message UpdateWalletResponse {
+  GetWalletResponse wallet = 1;
+}
+
+// --- REQUEST/RESPONSE MESSAGES FOR DELETION (DELETE) ---
+
+// Request to delete or archive a wallet.
+message DeleteWalletRequest {
+  string wallet_id = 1; // The ID of the wallet to delete.
+}
+
+// Response for deletion. Empty response signals success.
+message DeleteWalletResponse {}
+
+// --- SERVICE DEFINITION ---
+
+// The primary service interface for managing the user's wallet portfolio.
+service WalletService {
+  // Retrieves the detailed information for a single wallet.
+  rpc GetWallet(GetWalletRequest) returns (GetWalletResponse);
+
+  // Retrieves a list of all wallets belonging to the user.
+  rpc GetWallets(GetWalletsRequest) returns (GetWalletsResponse);
+
+  // Creates a new cryptographic wallet and saves its metadata.
+  rpc CreateWallet(CreateWalletRequest) returns (CreateWalletResponse);
+
+  // Updates mutable metadata associated with a wallet (name, default status).
+  rpc UpdateWallet(UpdateWalletRequest) returns (UpdateWalletResponse);
+
+  // Permanently deletes or archives a wallet record.
+  rpc DeleteWallet(DeleteWalletRequest) returns (DeleteWalletResponse);
+}

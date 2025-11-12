@@ -1,0 +1,4 @@
+# root/buf.work.yaml
+version: v1
+directories:
+  - proto

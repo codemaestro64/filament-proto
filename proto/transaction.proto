@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package pb;
+
+
+option go_package = "github.com/filament-labs/proto/gen/go/pb";
+
+import "google/protobuf/timestamp.proto";
+
+message Transaction {
+  enum TransactionType {
+    TRANSACTION_TYPE_UNSPECIFIED = 0;
+    SEND = 1;
+    RECEIVE = 2;
+    FEE = 3;
+    INTERNAL = 4; // moving between user wallets
+  }
+
+  enum TransactionStatus {
+    TRANSACTION_STATUS_UNSPECIFIED = 0;
+    PENDING = 1;
+    CONFIRMED = 2;
+    FAILED = 3;
+    CANCELED = 4;
+  }
+
+  string id = 1;
+  string wallet_id = 2;
+  TransactionType type = 3;
+  TransactionStatus status = 4;
+  
+  // Use string for amounts to prevent floating-point inaccuracies
+  string amount = 5; 
+  string currency = 6;
+  
+  string source_address = 7;
+  string target_address = 8;
+
+  string fee_amount = 9;
+  
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp confirmed_at = 11;
+}
+
+message SendTransactionRequest {
+  string source_wallet_id = 1;
+  string target_address = 2;
+  string amount = 3;
+  optional string note = 5; 
+}
+message SendTransactionResponse {
+  Transaction transaction = 1;
+}
+
+message GetTransactionRequest {
+  string transaction_id = 1;
+}
+message GetTransactionResponse {
+  Transaction transaction = 1;
+}
+
+message ListTransactionsRequest {
+  string wallet_id = 1;
+  
+  // Optional filters
+  optional Transaction.TransactionType type_filter = 2;
+  repeated Transaction.TransactionStatus status_filter = 3; 
+
+  // Pagination fields
+  int32 page_size = 4;
+  string page = 5;
+}
+message ListTransactionsResponse {
+  repeated Transaction transactions = 1;
+  string next_page = 2;
+}
+
+message StreamWalletTransactionsRequest {
+    // List of wallet IDs to listen for. An empty list might mean 'all wallets associated with the user'.
+    repeated string wallet_ids = 1; 
+}
+
+message StreamWalletTransactionsResponse {
+    Transaction transaction = 1;
+}
+
+service TransactionService {
+  // Initiate a new transaction (e.g., broadcasting to the network)
+  rpc SendTransaction(SendTransactionRequest) returns (SendTransactionResponse);
+
+  // Retrieve details for a specific transaction
+  rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse);
+
+  // Retrieve a list of transactions, typically for a specific wallet
+  rpc ListTransactions(ListTransactionsRequest) returns (ListTransactionsResponse);
+
+  // Streams transaction updates from the blockchain in real-time
+  rpc StreamWalletTransactions(StreamWalletTransactionsRequest) returns (stream StreamWalletTransactionsResponse);
+}
