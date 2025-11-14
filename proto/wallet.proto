@@ -57,7 +57,7 @@ message RecoverWalletRequest {
 }
 
 message RecoverWalletResponse {
-	CreateWalletResponse wallet = 1;
+	GetWalletResponse wallet = 1;
 }
 
 // --- REQUEST/RESPONSE MESSAGES FOR UPDATING (UPDATE) ---

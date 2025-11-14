@@ -403,7 +403,7 @@ func (x *RecoverWalletRequest) GetSeedPhrase() string {
 
 type RecoverWalletResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Wallet        *CreateWalletResponse  `protobuf:"bytes,1,opt,name=wallet,proto3" json:"wallet,omitempty"`
+	Wallet        *GetWalletResponse     `protobuf:"bytes,1,opt,name=wallet,proto3" json:"wallet,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -438,7 +438,7 @@ func (*RecoverWalletResponse) Descriptor() ([]byte, []int) {
 	return file_wallet_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *RecoverWalletResponse) GetWallet() *CreateWalletResponse {
+func (x *RecoverWalletResponse) GetWallet() *GetWalletResponse {
 	if x != nil {
 		return x.Wallet
 	}
@@ -673,9 +673,9 @@ const file_wallet_proto_rawDesc = "" +
 	"passphrase\x18\x02 \x01(\tR\n" +
 	"passphrase\x12\x1f\n" +
 	"\vseed_phrase\x18\x03 \x01(\tR\n" +
-	"seedPhrase\"I\n" +
-	"\x15RecoverWalletResponse\x120\n" +
-	"\x06wallet\x18\x01 \x01(\v2\x18.pb.CreateWalletResponseR\x06wallet\"\x9e\x01\n" +
+	"seedPhrase\"F\n" +
+	"\x15RecoverWalletResponse\x12-\n" +
+	"\x06wallet\x18\x01 \x01(\v2\x15.pb.GetWalletResponseR\x06wallet\"\x9e\x01\n" +
 	"\x13UpdateWalletRequest\x12\x1b\n" +
 	"\twallet_id\x18\x01 \x01(\tR\bwalletId\x12$\n" +
 	"\vwallet_name\x18\x02 \x01(\tH\x00R\n" +
@@ -732,7 +732,7 @@ var file_wallet_proto_depIdxs = []int32{
 	13, // 1: pb.GetWalletResponse.created_at:type_name -> google.protobuf.Timestamp
 	1,  // 2: pb.GetWalletsResponse.wallets:type_name -> pb.GetWalletResponse
 	1,  // 3: pb.CreateWalletResponse.wallet:type_name -> pb.GetWalletResponse
-	5,  // 4: pb.RecoverWalletResponse.wallet:type_name -> pb.CreateWalletResponse
+	1,  // 4: pb.RecoverWalletResponse.wallet:type_name -> pb.GetWalletResponse
 	1,  // 5: pb.UpdateWalletResponse.wallet:type_name -> pb.GetWalletResponse
 	0,  // 6: pb.WalletService.GetWallet:input_type -> pb.GetWalletRequest
 	2,  // 7: pb.WalletService.GetWallets:input_type -> pb.GetWalletsRequest
