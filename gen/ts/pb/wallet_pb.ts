@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file wallet.proto.
  */
 export const file_wallet: GenFile = /*@__PURE__*/
-  fileDesc("Cgx3YWxsZXQucHJvdG8SAnBiIiUKEEdldFdhbGxldFJlcXVlc3QSEQoJd2FsbGV0X2lkGAEgASgJIvQBChFHZXRXYWxsZXRSZXNwb25zZRIKCgJpZBgBIAEoCRISCgppc19kZWZhdWx0GAIgASgIEhMKC3dhbGxldF9uYW1lGAMgASgJEjcKCWFkZHJlc3NlcxgEIAMoCzIkLnBiLkdldFdhbGxldFJlc3BvbnNlLkFkZHJlc3Nlc0VudHJ5Eg8KB2JhbGFuY2UYBSABKAkSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaMAoOQWRkcmVzc2VzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASITChFHZXRXYWxsZXRzUmVxdWVzdCJPChJHZXRXYWxsZXRzUmVzcG9uc2USEQoJaXNfbG9ja2VkGAEgASgIEiYKB3dhbGxldHMYAiADKAsyFS5wYi5HZXRXYWxsZXRSZXNwb25zZSJSChNDcmVhdGVXYWxsZXRSZXF1ZXN0EhMKC3dhbGxldF9uYW1lGAEgASgJEhcKCnBhc3NwaHJhc2UYAiABKAlIAIgBAUINCgtfcGFzc3BocmFzZSI9ChRDcmVhdGVXYWxsZXRSZXNwb25zZRIlCgZ3YWxsZXQYASABKAsyFS5wYi5HZXRXYWxsZXRSZXNwb25zZSJ8ChNVcGRhdGVXYWxsZXRSZXF1ZXN0EhEKCXdhbGxldF9pZBgBIAEoCRIYCgt3YWxsZXRfbmFtZRgCIAEoCUgAiAEBEhgKC3NldF9kZWZhdWx0GAMgASgISAGIAQFCDgoMX3dhbGxldF9uYW1lQg4KDF9zZXRfZGVmYXVsdCI9ChRVcGRhdGVXYWxsZXRSZXNwb25zZRIlCgZ3YWxsZXQYASABKAsyFS5wYi5HZXRXYWxsZXRSZXNwb25zZSIoChNEZWxldGVXYWxsZXRSZXF1ZXN0EhEKCXdhbGxldF9pZBgBIAEoCSIWChREZWxldGVXYWxsZXRSZXNwb25zZTLPAgoNV2FsbGV0U2VydmljZRI4CglHZXRXYWxsZXQSFC5wYi5HZXRXYWxsZXRSZXF1ZXN0GhUucGIuR2V0V2FsbGV0UmVzcG9uc2USOwoKR2V0V2FsbGV0cxIVLnBiLkdldFdhbGxldHNSZXF1ZXN0GhYucGIuR2V0V2FsbGV0c1Jlc3BvbnNlEkEKDENyZWF0ZVdhbGxldBIXLnBiLkNyZWF0ZVdhbGxldFJlcXVlc3QaGC5wYi5DcmVhdGVXYWxsZXRSZXNwb25zZRJBCgxVcGRhdGVXYWxsZXQSFy5wYi5VcGRhdGVXYWxsZXRSZXF1ZXN0GhgucGIuVXBkYXRlV2FsbGV0UmVzcG9uc2USQQoMRGVsZXRlV2FsbGV0EhcucGIuRGVsZXRlV2FsbGV0UmVxdWVzdBoYLnBiLkRlbGV0ZVdhbGxldFJlc3BvbnNlQipaKGdpdGh1Yi5jb20vZmlsYW1lbnQtbGFicy9wcm90by9nZW4vZ28vcGJiBnByb3RvMw", [file_google_protobuf_timestamp]);
+  fileDesc("Cgx3YWxsZXQucHJvdG8SAnBiIiUKEEdldFdhbGxldFJlcXVlc3QSEQoJd2FsbGV0X2lkGAEgASgJIvQBChFHZXRXYWxsZXRSZXNwb25zZRIKCgJpZBgBIAEoCRISCgppc19kZWZhdWx0GAIgASgIEhMKC3dhbGxldF9uYW1lGAMgASgJEjcKCWFkZHJlc3NlcxgEIAMoCzIkLnBiLkdldFdhbGxldFJlc3BvbnNlLkFkZHJlc3Nlc0VudHJ5Eg8KB2JhbGFuY2UYBSABKAkSLgoKY3JlYXRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaMAoOQWRkcmVzc2VzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ASITChFHZXRXYWxsZXRzUmVxdWVzdCJPChJHZXRXYWxsZXRzUmVzcG9uc2USEQoJaXNfbG9ja2VkGAEgASgIEiYKB3dhbGxldHMYAiADKAsyFS5wYi5HZXRXYWxsZXRSZXNwb25zZSJSChNDcmVhdGVXYWxsZXRSZXF1ZXN0EhMKC3dhbGxldF9uYW1lGAEgASgJEhcKCnBhc3NwaHJhc2UYAiABKAlIAIgBAUINCgtfcGFzc3BocmFzZSI9ChRDcmVhdGVXYWxsZXRSZXNwb25zZRIlCgZ3YWxsZXQYASABKAsyFS5wYi5HZXRXYWxsZXRSZXNwb25zZSJUChRSZWNvdmVyV2FsbGV0UmVxdWVzdBITCgt3YWxsZXRfbmFtZRgBIAEoCRISCgpwYXNzcGhyYXNlGAIgASgJEhMKC3NlZWRfcGhyYXNlGAMgASgJIkEKFVJlY292ZXJXYWxsZXRSZXNwb25zZRIoCgZ3YWxsZXQYASABKAsyGC5wYi5DcmVhdGVXYWxsZXRSZXNwb25zZSJ8ChNVcGRhdGVXYWxsZXRSZXF1ZXN0EhEKCXdhbGxldF9pZBgBIAEoCRIYCgt3YWxsZXRfbmFtZRgCIAEoCUgAiAEBEhgKC3NldF9kZWZhdWx0GAMgASgISAGIAQFCDgoMX3dhbGxldF9uYW1lQg4KDF9zZXRfZGVmYXVsdCI9ChRVcGRhdGVXYWxsZXRSZXNwb25zZRIlCgZ3YWxsZXQYASABKAsyFS5wYi5HZXRXYWxsZXRSZXNwb25zZSIoChNEZWxldGVXYWxsZXRSZXF1ZXN0EhEKCXdhbGxldF9pZBgBIAEoCSIWChREZWxldGVXYWxsZXRSZXNwb25zZTKVAwoNV2FsbGV0U2VydmljZRI4CglHZXRXYWxsZXQSFC5wYi5HZXRXYWxsZXRSZXF1ZXN0GhUucGIuR2V0V2FsbGV0UmVzcG9uc2USOwoKR2V0V2FsbGV0cxIVLnBiLkdldFdhbGxldHNSZXF1ZXN0GhYucGIuR2V0V2FsbGV0c1Jlc3BvbnNlEkEKDENyZWF0ZVdhbGxldBIXLnBiLkNyZWF0ZVdhbGxldFJlcXVlc3QaGC5wYi5DcmVhdGVXYWxsZXRSZXNwb25zZRJECg1SZWNvdmVyV2FsbGV0EhgucGIuUmVjb3ZlcldhbGxldFJlcXVlc3QaGS5wYi5SZWNvdmVyV2FsbGV0UmVzcG9uc2USQQoMVXBkYXRlV2FsbGV0EhcucGIuVXBkYXRlV2FsbGV0UmVxdWVzdBoYLnBiLlVwZGF0ZVdhbGxldFJlc3BvbnNlEkEKDERlbGV0ZVdhbGxldBIXLnBiLkRlbGV0ZVdhbGxldFJlcXVlc3QaGC5wYi5EZWxldGVXYWxsZXRSZXNwb25zZUIqWihnaXRodWIuY29tL2ZpbGFtZW50LWxhYnMvcHJvdG8vZ2VuL2dvL3BiYgZwcm90bzM", [file_google_protobuf_timestamp]);
 
 /**
  * Request to retrieve a single, specific wallet by its unique identifier.
@@ -182,6 +182,50 @@ export const CreateWalletResponseSchema: GenMessage<CreateWalletResponse> = /*@_
   messageDesc(file_wallet, 5);
 
 /**
+ * @generated from message pb.RecoverWalletRequest
+ */
+export type RecoverWalletRequest = Message<"pb.RecoverWalletRequest"> & {
+  /**
+   * @generated from field: string wallet_name = 1;
+   */
+  walletName: string;
+
+  /**
+   * @generated from field: string passphrase = 2;
+   */
+  passphrase: string;
+
+  /**
+   * @generated from field: string seed_phrase = 3;
+   */
+  seedPhrase: string;
+};
+
+/**
+ * Describes the message pb.RecoverWalletRequest.
+ * Use `create(RecoverWalletRequestSchema)` to create a new message.
+ */
+export const RecoverWalletRequestSchema: GenMessage<RecoverWalletRequest> = /*@__PURE__*/
+  messageDesc(file_wallet, 6);
+
+/**
+ * @generated from message pb.RecoverWalletResponse
+ */
+export type RecoverWalletResponse = Message<"pb.RecoverWalletResponse"> & {
+  /**
+   * @generated from field: pb.CreateWalletResponse wallet = 1;
+   */
+  wallet?: CreateWalletResponse;
+};
+
+/**
+ * Describes the message pb.RecoverWalletResponse.
+ * Use `create(RecoverWalletResponseSchema)` to create a new message.
+ */
+export const RecoverWalletResponseSchema: GenMessage<RecoverWalletResponse> = /*@__PURE__*/
+  messageDesc(file_wallet, 7);
+
+/**
  * Request to update metadata for an existing wallet.
  *
  * @generated from message pb.UpdateWalletRequest
@@ -214,7 +258,7 @@ export type UpdateWalletRequest = Message<"pb.UpdateWalletRequest"> & {
  * Use `create(UpdateWalletRequestSchema)` to create a new message.
  */
 export const UpdateWalletRequestSchema: GenMessage<UpdateWalletRequest> = /*@__PURE__*/
-  messageDesc(file_wallet, 6);
+  messageDesc(file_wallet, 8);
 
 /**
  * Response returning the updated wallet details.
@@ -233,7 +277,7 @@ export type UpdateWalletResponse = Message<"pb.UpdateWalletResponse"> & {
  * Use `create(UpdateWalletResponseSchema)` to create a new message.
  */
 export const UpdateWalletResponseSchema: GenMessage<UpdateWalletResponse> = /*@__PURE__*/
-  messageDesc(file_wallet, 7);
+  messageDesc(file_wallet, 9);
 
 /**
  * Request to delete or archive a wallet.
@@ -254,7 +298,7 @@ export type DeleteWalletRequest = Message<"pb.DeleteWalletRequest"> & {
  * Use `create(DeleteWalletRequestSchema)` to create a new message.
  */
 export const DeleteWalletRequestSchema: GenMessage<DeleteWalletRequest> = /*@__PURE__*/
-  messageDesc(file_wallet, 8);
+  messageDesc(file_wallet, 10);
 
 /**
  * Response for deletion. Empty response signals success.
@@ -269,7 +313,7 @@ export type DeleteWalletResponse = Message<"pb.DeleteWalletResponse"> & {
  * Use `create(DeleteWalletResponseSchema)` to create a new message.
  */
 export const DeleteWalletResponseSchema: GenMessage<DeleteWalletResponse> = /*@__PURE__*/
-  messageDesc(file_wallet, 9);
+  messageDesc(file_wallet, 11);
 
 /**
  * The primary service interface for managing the user's wallet portfolio.
@@ -306,6 +350,14 @@ export const WalletService: GenService<{
     methodKind: "unary";
     input: typeof CreateWalletRequestSchema;
     output: typeof CreateWalletResponseSchema;
+  },
+  /**
+   * @generated from rpc pb.WalletService.RecoverWallet
+   */
+  recoverWallet: {
+    methodKind: "unary";
+    input: typeof RecoverWalletRequestSchema;
+    output: typeof RecoverWalletResponseSchema;
   },
   /**
    * Updates mutable metadata associated with a wallet (name, default status).

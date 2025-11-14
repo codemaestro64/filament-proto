@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { CreateWalletRequest, CreateWalletResponse, DeleteWalletRequest, DeleteWalletResponse, GetWalletRequest, GetWalletResponse, GetWalletsRequest, GetWalletsResponse, UpdateWalletRequest, UpdateWalletResponse } from "./wallet_pb.js";
+import { CreateWalletRequest, CreateWalletResponse, DeleteWalletRequest, DeleteWalletResponse, GetWalletRequest, GetWalletResponse, GetWalletsRequest, GetWalletsResponse, RecoverWalletRequest, RecoverWalletResponse, UpdateWalletRequest, UpdateWalletResponse } from "./wallet_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -45,6 +45,15 @@ export const WalletService = {
       name: "CreateWallet",
       I: CreateWalletRequest,
       O: CreateWalletResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc pb.WalletService.RecoverWallet
+     */
+    recoverWallet: {
+      name: "RecoverWallet",
+      I: RecoverWalletRequest,
+      O: RecoverWalletResponse,
       kind: MethodKind.Unary,
     },
     /**

@@ -50,6 +50,16 @@ message CreateWalletResponse {
   GetWalletResponse wallet = 1;
 }
 
+message RecoverWalletRequest {
+	string wallet_name = 1;
+	string passphrase = 2;
+	string seed_phrase = 3;
+}
+
+message RecoverWalletResponse {
+	CreateWalletResponse wallet = 1;
+}
+
 // --- REQUEST/RESPONSE MESSAGES FOR UPDATING (UPDATE) ---
 
 // Request to update metadata for an existing wallet.
@@ -86,6 +96,8 @@ service WalletService {
 
   // Creates a new cryptographic wallet and saves its metadata.
   rpc CreateWallet(CreateWalletRequest) returns (CreateWalletResponse);
+  
+  rpc RecoverWallet(RecoverWalletRequest) returns (RecoverWalletResponse);
 
   // Updates mutable metadata associated with a wallet (name, default status).
   rpc UpdateWallet(UpdateWalletRequest) returns (UpdateWalletResponse);

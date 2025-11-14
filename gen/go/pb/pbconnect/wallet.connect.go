@@ -41,6 +41,9 @@ const (
 	// WalletServiceCreateWalletProcedure is the fully-qualified name of the WalletService's
 	// CreateWallet RPC.
 	WalletServiceCreateWalletProcedure = "/pb.WalletService/CreateWallet"
+	// WalletServiceRecoverWalletProcedure is the fully-qualified name of the WalletService's
+	// RecoverWallet RPC.
+	WalletServiceRecoverWalletProcedure = "/pb.WalletService/RecoverWallet"
 	// WalletServiceUpdateWalletProcedure is the fully-qualified name of the WalletService's
 	// UpdateWallet RPC.
 	WalletServiceUpdateWalletProcedure = "/pb.WalletService/UpdateWallet"
@@ -57,6 +60,7 @@ type WalletServiceClient interface {
 	GetWallets(context.Context, *connect_go.Request[pb.GetWalletsRequest]) (*connect_go.Response[pb.GetWalletsResponse], error)
 	// Creates a new cryptographic wallet and saves its metadata.
 	CreateWallet(context.Context, *connect_go.Request[pb.CreateWalletRequest]) (*connect_go.Response[pb.CreateWalletResponse], error)
+	RecoverWallet(context.Context, *connect_go.Request[pb.RecoverWalletRequest]) (*connect_go.Response[pb.RecoverWalletResponse], error)
 	// Updates mutable metadata associated with a wallet (name, default status).
 	UpdateWallet(context.Context, *connect_go.Request[pb.UpdateWalletRequest]) (*connect_go.Response[pb.UpdateWalletResponse], error)
 	// Permanently deletes or archives a wallet record.
@@ -88,6 +92,11 @@ func NewWalletServiceClient(httpClient connect_go.HTTPClient, baseURL string, op
 			baseURL+WalletServiceCreateWalletProcedure,
 			opts...,
 		),
+		recoverWallet: connect_go.NewClient[pb.RecoverWalletRequest, pb.RecoverWalletResponse](
+			httpClient,
+			baseURL+WalletServiceRecoverWalletProcedure,
+			opts...,
+		),
 		updateWallet: connect_go.NewClient[pb.UpdateWalletRequest, pb.UpdateWalletResponse](
 			httpClient,
 			baseURL+WalletServiceUpdateWalletProcedure,
@@ -103,11 +112,12 @@ func NewWalletServiceClient(httpClient connect_go.HTTPClient, baseURL string, op
 
 // walletServiceClient implements WalletServiceClient.
 type walletServiceClient struct {
-	getWallet    *connect_go.Client[pb.GetWalletRequest, pb.GetWalletResponse]
-	getWallets   *connect_go.Client[pb.GetWalletsRequest, pb.GetWalletsResponse]
-	createWallet *connect_go.Client[pb.CreateWalletRequest, pb.CreateWalletResponse]
-	updateWallet *connect_go.Client[pb.UpdateWalletRequest, pb.UpdateWalletResponse]
-	deleteWallet *connect_go.Client[pb.DeleteWalletRequest, pb.DeleteWalletResponse]
+	getWallet     *connect_go.Client[pb.GetWalletRequest, pb.GetWalletResponse]
+	getWallets    *connect_go.Client[pb.GetWalletsRequest, pb.GetWalletsResponse]
+	createWallet  *connect_go.Client[pb.CreateWalletRequest, pb.CreateWalletResponse]
+	recoverWallet *connect_go.Client[pb.RecoverWalletRequest, pb.RecoverWalletResponse]
+	updateWallet  *connect_go.Client[pb.UpdateWalletRequest, pb.UpdateWalletResponse]
+	deleteWallet  *connect_go.Client[pb.DeleteWalletRequest, pb.DeleteWalletResponse]
 }
 
 // GetWallet calls pb.WalletService.GetWallet.
@@ -123,6 +133,11 @@ func (c *walletServiceClient) GetWallets(ctx context.Context, req *connect_go.Re
 // CreateWallet calls pb.WalletService.CreateWallet.
 func (c *walletServiceClient) CreateWallet(ctx context.Context, req *connect_go.Request[pb.CreateWalletRequest]) (*connect_go.Response[pb.CreateWalletResponse], error) {
 	return c.createWallet.CallUnary(ctx, req)
+}
+
+// RecoverWallet calls pb.WalletService.RecoverWallet.
+func (c *walletServiceClient) RecoverWallet(ctx context.Context, req *connect_go.Request[pb.RecoverWalletRequest]) (*connect_go.Response[pb.RecoverWalletResponse], error) {
+	return c.recoverWallet.CallUnary(ctx, req)
 }
 
 // UpdateWallet calls pb.WalletService.UpdateWallet.
@@ -143,6 +158,7 @@ type WalletServiceHandler interface {
 	GetWallets(context.Context, *connect_go.Request[pb.GetWalletsRequest]) (*connect_go.Response[pb.GetWalletsResponse], error)
 	// Creates a new cryptographic wallet and saves its metadata.
 	CreateWallet(context.Context, *connect_go.Request[pb.CreateWalletRequest]) (*connect_go.Response[pb.CreateWalletResponse], error)
+	RecoverWallet(context.Context, *connect_go.Request[pb.RecoverWalletRequest]) (*connect_go.Response[pb.RecoverWalletResponse], error)
 	// Updates mutable metadata associated with a wallet (name, default status).
 	UpdateWallet(context.Context, *connect_go.Request[pb.UpdateWalletRequest]) (*connect_go.Response[pb.UpdateWalletResponse], error)
 	// Permanently deletes or archives a wallet record.
@@ -170,6 +186,11 @@ func NewWalletServiceHandler(svc WalletServiceHandler, opts ...connect_go.Handle
 		svc.CreateWallet,
 		opts...,
 	)
+	walletServiceRecoverWalletHandler := connect_go.NewUnaryHandler(
+		WalletServiceRecoverWalletProcedure,
+		svc.RecoverWallet,
+		opts...,
+	)
 	walletServiceUpdateWalletHandler := connect_go.NewUnaryHandler(
 		WalletServiceUpdateWalletProcedure,
 		svc.UpdateWallet,
@@ -188,6 +209,8 @@ func NewWalletServiceHandler(svc WalletServiceHandler, opts ...connect_go.Handle
 			walletServiceGetWalletsHandler.ServeHTTP(w, r)
 		case WalletServiceCreateWalletProcedure:
 			walletServiceCreateWalletHandler.ServeHTTP(w, r)
+		case WalletServiceRecoverWalletProcedure:
+			walletServiceRecoverWalletHandler.ServeHTTP(w, r)
 		case WalletServiceUpdateWalletProcedure:
 			walletServiceUpdateWalletHandler.ServeHTTP(w, r)
 		case WalletServiceDeleteWalletProcedure:
@@ -211,6 +234,10 @@ func (UnimplementedWalletServiceHandler) GetWallets(context.Context, *connect_go
 
 func (UnimplementedWalletServiceHandler) CreateWallet(context.Context, *connect_go.Request[pb.CreateWalletRequest]) (*connect_go.Response[pb.CreateWalletResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("pb.WalletService.CreateWallet is not implemented"))
+}
+
+func (UnimplementedWalletServiceHandler) RecoverWallet(context.Context, *connect_go.Request[pb.RecoverWalletRequest]) (*connect_go.Response[pb.RecoverWalletResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("pb.WalletService.RecoverWallet is not implemented"))
 }
 
 func (UnimplementedWalletServiceHandler) UpdateWallet(context.Context, *connect_go.Request[pb.UpdateWalletRequest]) (*connect_go.Response[pb.UpdateWalletResponse], error) {
